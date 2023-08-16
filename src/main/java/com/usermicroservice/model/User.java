@@ -2,12 +2,19 @@ package com.usermicroservice.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 
+@Entity
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -15,51 +22,8 @@ public class User {
     @Column(name = "user_id", nullable = false)
     private int userId;
 
-    private String Username;
+    private String username;
 
     private String email;
 
-    private List<Order> orders;
-
-    public User(int userId, String username, String email) {
-        this.userId = userId;
-        Username = username;
-        this.email = email;
-    }
-
-    public User() {
-
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String username) {
-        Username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
 }

@@ -10,20 +10,24 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-
     private final UserRepo userRepo;
 
     public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
-    User saveUser(int userId, String username, String email) {
-        User user = new User(userId, username, email);
-        return userRepo.save(user);
+    public User createUser(String username, String email) {
+        User user = User.builder().username(username).email(email).build();
+        userRepo.save(user);
+        return user;
     }
 
-    Optional<User> findById(int id) {
-        return userRepo.findById(id);
+    public User getUserById(int id) {
+        Optional<User> userOptional = userRepo.findById(id);
+        if(userOptional.isPresent()) {
+            return userOptional.get();
+        }
+        throw new RuntimeException("Not found");
     }
 }
 
